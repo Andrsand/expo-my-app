@@ -1,23 +1,37 @@
-import React from 'react';
-import { Text, TextInput, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, Text, View } from 'react-native';
 
-const Cat = () => {
+const Cat = props => {
+  const [isHungry, setIsHungry] = useState(true);
+
   return (
     <View>
-      <Text>Hello, I am...</Text>
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1,
+      <Text>
+        I am {props.name}, and I am {isHungry ? 'hungry' : 'full'}!
+      </Text>
+      <br />
+      <Button
+        onPress={() => {
+          setIsHungry(false);
         }}
-        defaultValue="Name me!"
+        disabled={!isHungry}
+        title={isHungry ? 'Pour me some milk, please!' : 'Thank you!'}
       />
     </View>
   );
 };
 
-export default Cat;
+const Cafe = () => {
+  return (
+    <>
+      <Cat name="Munkustrap" />
+
+      <Cat name="Spot" />
+    </>
+  );
+};
+
+export default Cafe;
 
 
 
